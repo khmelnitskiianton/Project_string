@@ -1,0 +1,100 @@
+#include <stdio.h>
+const int LIM = 4;
+const int LENG = 20;
+#define STLEN 10
+int main()
+{
+    //diffrent initialization
+    const char pet1[30] = "Cat";
+    const char pet2[] = "Elefant";
+    const char pet3[10] = {'D','o','g','\0'};
+    
+    //string like array is address
+    char car[10] = "Moon";
+    //car == &car[0]   *car == 'M'   *(car+1) == car[1] == 'o'
+
+    //adresses
+    const char *pt1 = "Hello World";
+    const char ar[] = "Hello World";
+    //initializtion of array return copy string from static memory
+    //but initialization of indicator copy only adress of string from atatic memory
+    /*
+    diffrent:
+    1) increment can take only for indicator, because adress of array is static
+    2) you can write pt1 = ar, then pt1 will indicate ar. but ar = pt1 - error, because ar - static adress
+    while (*(head) != '\0')
+        putchar(*(head++));
+    cool
+    */
+   //elements of array are variable, but name of array is constant
+   //you cant change string with indicator, because it is adress in static memory
+   const char *pt2 = "hyperxxxxx"; // best way, you use indicator if you dont need to change string
+
+    const char *mytalents[LIM] = {
+        "First",
+        "Second",
+        "Third",
+        "Forth"
+    };
+    const char yourtalents[LIM][LENG] = {
+        "anfkj",
+        "amflkajlfj",
+        "0199kjdkjfsj",
+        "no"
+    };
+    //first indicator is array of indicators, second - copy of array of adresses
+    /*
+    mytalents is more effective - minimum memory!
+    But you can change nothing because of adresses
+    yourtalents is not so effective becuse leng, but you can change elemets!
+    */
+
+    //Input string
+    //gets() fgets() get_s() scanf()
+    
+    /*
+    1. gets(<string>) - scan all string before \n and save string without \n + \0
+    but it cant know size of string and it can be errors with it
+    words[10] -> gets(words) -> <bigbigbigwords>
+    */
+
+    /*
+    2. fgets(<string>, MAXLEN, stdin) - it has max length of scanning - second argument, stdin - format of input(can scan from file)
+    it save \n 
+    it returns indicator to char. if string ends, fgets return NULL 
+    */
+    /*
+    char words [STLEN];                                                         //scaning stirng
+    puts ("Введите строки (или пустую строку для выхода из программы) :"); 
+    while (fgets (words, STLEN, stdin) != NULL && words[0] != '\n')
+        fputs (words, stdout); 
+    puts("Готово.");
+    */
+    /*
+    int i = 0;
+    while (words[i] != '\n')                                                        //change string before first \n  
+        words[i] = '\0';
+    */
+    /*
+    while (getchar() != '\n')                                                           //scan without \n
+        continue; 
+    */
+    /*
+    char words [STLEN];
+    int i;
+    puts("Введите строки (или пустую строку для выхода из программы):"); 
+    while (fgets(words, STLEN, stdin) != NULL && words[0] != '\n')
+    {
+        i = 0;
+        while (words[i] != '\n' && words[i] != '\0')
+            i++;
+        if (words[i] == '\n')
+            words[i] = '\0';
+        else 
+            while (getchar() != '\n')
+                continue;
+        puts(words);
+    }
+    */
+    return 0;
+}
