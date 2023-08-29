@@ -104,3 +104,27 @@ char * my_fgets( char word[], size_t num, FILE * filestream )
     word[i] = '\0';
     return word;
 }
+
+int my_strcmp(const char str1[], const char str2[])
+{
+    size_t i = 0;
+
+    while ((str1[i] != '\0') && (str2[i] != '\0'))
+    {
+        if (str1[i] != str2[i]) 
+        {  
+            if (str2[i] > str1[i])
+                return -1;
+            else
+                return 1;
+        }
+        i++;
+    }
+
+    if (str1[i] == '\0') 
+        return -1;
+    if (str2[i] == '\0')
+        return 1;
+
+    return 0;
+}
