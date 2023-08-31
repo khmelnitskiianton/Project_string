@@ -1,37 +1,42 @@
-#include "mystring.h"
 
+#include "head.h"
 
-void my_puts(const char word[])
+int my_puts (const char word[])
 {
-    int i = 0;
-    char ch = '\n';
-    while ((ch = word[i]) != '\0')
-    {
-        putchar (ch);
+    size_t i = 0;
+    while (word[i] != '\0')
+    { 
+        if (putchar (word[i]) == EOF)
+            return EOF;
         i++;
     }
     putchar ('\n');
+    return 0;
 }
 
-const char * my_strchr (const char word[], int symbol)
+/*const */ char* my_strchr (/*const*/ char word[], int symbol)
 {
-    int i = 0;
-    char ch = 0;
-    while ( (ch = word[i]) != symbol)
+    size_t i = 0;
+
+    while ((word[i] != symbol)&&(word[i] != '\0'))
         i++;
+
+    if (word[i] == '\0')
+        return nullptr;
+
     return &word[i];
+
 }
 
-size_t my_strlen(const char word[])
+size_t my_strlen (const char word[])
 {
-    int i = 0;
-    char ch = 0;
-    while ((ch = word[i]) != '\0')
+    size_t i = 0;
+    while (word[i] != '\0')
         i++;
     return i;
 }
 
-char * my_strcpy(char dest[], const char src[])
+char* my_strcpy (char dest[], const char src[])
 {
     size_t i = 0;
     while(src[i] != '\0')
@@ -43,7 +48,7 @@ char * my_strcpy(char dest[], const char src[])
     return dest;
 }
 
-char * my_strncpy(char dest[], const char src[], size_t num)
+char* my_strncpy (char dest[], const char src[], size_t num)
 {
     size_t i = 0;
     while ((src[i] != '\0') && (i < num))
@@ -56,7 +61,7 @@ char * my_strncpy(char dest[], const char src[], size_t num)
     return dest;
 }
 
-char * my_strcat(char dest[], const char src[])
+char* my_strcat (char dest[], const char src[])
 {
     size_t i = 0;
     while (dest[i] != '\0')
@@ -72,7 +77,7 @@ char * my_strcat(char dest[], const char src[])
     return dest;
 }
 
-char * my_strncat( char dest[], const char src[], size_t num)
+char* my_strncat (char dest[], const char src[], size_t num)
 {
     size_t i = 0;
     while (dest[i] != '\0')
@@ -88,7 +93,7 @@ char * my_strncat( char dest[], const char src[], size_t num)
     return dest;
 }
 
-char * my_fgets( char word[], size_t num, FILE * filestream )
+char* my_fgets ( char word[], size_t num, FILE * filestream )
 {
     size_t i = 0;
     int flag = 1; 
@@ -105,7 +110,7 @@ char * my_fgets( char word[], size_t num, FILE * filestream )
     return word;
 }
 
-int my_strcmp(const char str1[], const char str2[])
+int my_strcmp (const char str1[], const char str2[])
 {
     size_t i = 0;
 
@@ -121,10 +126,28 @@ int my_strcmp(const char str1[], const char str2[])
         i++;
     }
 
-    if (str1[i] == '\0') 
+    if ((str1[i] == '\0') && (str2[i] == '\0'))
+        return 0;
+
+    if (str1[i] == '\0')
         return -1;
+
     if (str2[i] == '\0')
         return 1;
+}
 
-    return 0;
+char* my_strdup (const char * src)
+{
+	size_t j = 0;
+	while (src[j] != '\0')
+		j++;
+	size_t length = j+1;
+
+	char *ptr = (char *) malloc (length * sizeof (char));
+	for (size_t i = 0; i < length; i++)
+		ptr[i] = src[i];
+
+    ptr[length] = '\0';
+
+	return ptr; 
 }
