@@ -14,7 +14,7 @@ int my_puts (const char word[])
     return 0;
 }
 
-/*const */ char* my_strchr (/*const*/ char word[], int symbol)
+const char* my_strchr (const char word[], int symbol)
 {
     size_t i = 0;
 
@@ -101,6 +101,9 @@ char* my_fgets ( char word[], size_t num, FILE * filestream )
     while ((i < num) && flag )
     {
         ch = getc(filestream);
+        if (ch == EOF)
+            return nullptr;
+
         if (ch == '\n')
             flag = 0;
         word[i] = ch;
@@ -144,6 +147,10 @@ char* my_strdup (const char * src)
 	size_t length = j+1;
 
 	char *ptr = (char *) malloc (length * sizeof (char));
+
+    if (ptr == NULL)
+        return NULL;
+         
 	for (size_t i = 0; i < length; i++)
 		ptr[i] = src[i];
 

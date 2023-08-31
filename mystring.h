@@ -1,6 +1,6 @@
 int my_puts (const char word[]);
 
-/*const*/ char* my_strchr (/*const*/ char word[], int symbol);
+const char* my_strchr (const char word[], int symbol);
 
 size_t my_strlen (const char word[]);
 
