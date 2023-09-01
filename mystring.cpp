@@ -18,8 +18,8 @@ const char* my_strchr (const char word[], int symbol)
 {
     size_t i = 0;
 
-    while ((word[i] != symbol)&&(word[i] != '\0'))
-        i++;
+    for (i = 0; (word[i] != symbol)&&(word[i] != '\0'); ++i)
+    {}
 
     if (word[i] == '\0')
         return nullptr;
@@ -31,19 +31,18 @@ const char* my_strchr (const char word[], int symbol)
 size_t my_strlen (const char word[])
 {
     size_t i = 0;
-    while (word[i] != '\0')
-        i++;
+    for (i = 0; word[i]; ++i)
+    {}
     return i;
 }
 
 char* my_strcpy (char dest[], const char src[])
 {
     size_t i = 0;
-    while(src[i] != '\0')
-    {
+
+    for (i = 0; src[i]; ++i)
         dest[i] = src[i];
-        i++;
-    }    
+
     dest[i] = '\0';
     return dest;
 }
@@ -51,11 +50,9 @@ char* my_strcpy (char dest[], const char src[])
 char* my_strncpy (char dest[], const char src[], size_t num)
 {
     size_t i = 0;
-    while ((src[i] != '\0') && (i < num))
-    {
+    for (i = 0; (src[i] != '\0') && (i < num); ++i)
         dest[i] = src[i];
-        i++;
-    }
+
     if (src[i] == '\0')
         dest[i] = '\0';
     return dest;
@@ -64,8 +61,9 @@ char* my_strncpy (char dest[], const char src[], size_t num)
 char* my_strcat (char dest[], const char src[])
 {
     size_t i = 0;
-    while (dest[i] != '\0')
-        i++;
+    for (i = 0; dest[i]; ++i) 
+    {}
+
     size_t j = 0;
     while (src[j] != '\0')
     {
@@ -80,8 +78,9 @@ char* my_strcat (char dest[], const char src[])
 char* my_strncat (char dest[], const char src[], size_t num)
 {
     size_t i = 0;
-    while (dest[i] != '\0')
-        i++;
+    for (i = 0; dest[i]; ++i) 
+    {}
+
     size_t j = 0;
     while ((src[j] != '\0')&&(j < num))
     {
@@ -116,8 +115,7 @@ char* my_fgets ( char word[], size_t num, FILE * filestream )
 int my_strcmp (const char str1[], const char str2[])
 {
     size_t i = 0;
-
-    while ((str1[i] != '\0') && (str2[i] != '\0'))
+    for (i = 0; (str1[i] != '\0') && (str2[i] != '\0'); ++i)
     {
         if (str1[i] != str2[i]) 
         {  
@@ -126,7 +124,6 @@ int my_strcmp (const char str1[], const char str2[])
             else
                 return 1;
         }
-        i++;
     }
 
     if ((str1[i] == '\0') && (str2[i] == '\0'))
@@ -141,20 +138,24 @@ int my_strcmp (const char str1[], const char str2[])
 
 char* my_strdup (const char * src)
 {
+    if (src == NULL)
+        return NULL;
+        
 	size_t j = 0;
-	while (src[j] != '\0')
-		j++;
+	for (j = 0; src[j]; ++j)
+    {}
+
 	size_t length = j+1;
 
 	char *ptr = (char *) malloc (length * sizeof (char));
 
     if (ptr == NULL)
         return NULL;
-         
+
 	for (size_t i = 0; i < length; i++)
 		ptr[i] = src[i];
 
-    ptr[length] = '\0';
+    ptr[length-1] = '\0';
 
 	return ptr; 
 }
